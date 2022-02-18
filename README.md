@@ -30,7 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Steps:
 
-### Step 1: Installing skeleton angular app
+### Step 1: Installing skeleton angular app (~30 minutes)
 
 Installation of angular app is done using following command:
 ```shell
@@ -38,7 +38,7 @@ ng new dundts
 ```
 which creates a project by the name ''dundts''.
 
-### Step 2: Creation of main-app module
+### Step 2: Creation of main-app module (~ 1 hour)
 
 This module is intended to maintain main-app page content. 
 Headers, footers, sidebar, etc and links to other modules are kept here.
@@ -46,7 +46,7 @@ Headers, footers, sidebar, etc and links to other modules are kept here.
 Also, in order to show content of main-app html into app.component.html, the tag `<router-outlet>` is utilized.
 In addition, a child (main-app) is defined in app-routing.module.ts to import **main-app** module into **app** module.
 
-### Step 3: Creation of Eclass module
+### Step 3: Creation of Eclass module (~ 1 hour)
 
 This module is the main container of eclass system project. 
 Each component or module related to elcass system is placed inside this module.
