@@ -1,0 +1,18 @@
+.table-tree-invisible {
+    display: none;
+}
+
+.table-tree ul,
+.table-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+.table-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 40px;
+}
+
+.table-tree div[role=group] > .mat-tree-node {
+    padding-left: 40px;
+}

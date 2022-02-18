@@ -1,1 +1,19 @@
-<p style="padding: 20px">tree-table works!</p>
+<mat-tree [dataSource]="eclassService.treeDataSource" [treeControl]="eclassService.treeControl" class="table-tree">
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+        <span (click)="eclassService.filterTable(node.code)">{{node.name}}</span>
+    </mat-tree-node>
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: eclassService.hasChild">
+        <div class="mat-tree-node">
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                    {{eclassService.treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+            </button>
+            <span (click)="eclassService.filterTable(node.code)">{{node.name}}</span>
+        </div>
+        <div [class.table-tree-invisible]="!eclassService.treeControl.isExpanded(node)" role="group">
+            <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+    </mat-nested-tree-node>
+</mat-tree>

@@ -64,4 +64,4 @@ The e-class system front-end consists of three parts:
 * Search box: which has a text input for searching text, checkboxes to limit search fields, and a list of tables in a tree structure,
 * Table box: to display results.
 
-The table is filled with mock data at this point.
+The table and tree categories are filled and listed with mock data at this point.

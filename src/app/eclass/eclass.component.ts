@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {EclassService} from "./eclass.service";
 
 @Component({
     selector: 'app-eclass',
@@ -7,7 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EclassComponent implements OnInit {
 
-    constructor() {
+    constructor(
+        public eclassService: EclassService
+    ) {
     }
 
     ngOnInit(): void {
