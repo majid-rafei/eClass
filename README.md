@@ -45,3 +45,8 @@ Headers, footers, sidebar, etc and links to other modules are kept here.
 
 Also, in order to show content of main-app html into app.component.html, the tag `<router-outlet>` is utilized.
 In addition, a child (main-app) is defined in app-routing.module.ts to import **main-app** module into **app** module.
+
+### Step 3: Creation of Eclass module
+
+This module is the main container of eclass system project. 
+Each component or module related to elcass system is placed inside this module.
