@@ -37,3 +37,11 @@ Installation of angular app is done using following command:
 ng new dundts
 ```
 which creates a project by the name ''dundts''.
+
+### Step 2: Creation of main-app module
+
+This module is intended to maintain main-app page content. 
+Headers, footers, sidebar, etc and links to other modules are kept here.
+
+Also, in order to show content of main-app html into app.component.html, the tag `<router-outlet>` is utilized.
+In addition, a child (main-app) is defined in app-routing.module.ts to import **main-app** module into **app** module.
