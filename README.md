@@ -34,7 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Installation of the angular app is done using the following command:
 ```shell
-ng new dundts
+ng new dundts_frontend
 ```
 which creates a project by the name ''dundts''.
 
@@ -53,6 +53,7 @@ Each component or module related to the e-class system is placed inside this mod
 
 ### Step 4: Creation of e-class system front-end prototype (~ 3 hours)
 
+#### Initial steps for creating a simple prototype for the front page
 For UI the Angular Material is used and installed using the following command:
 ```shell
 ng add @angular/material
@@ -63,5 +64,17 @@ The e-class system front-end consists of three parts:
 * Header: which contains page description and a button to import CSV file into the database,
 * Search box: which has a text input for searching text, checkboxes to limit search fields, and a list of tables in a tree structure,
 * Table box: to display results.
+* All elements are given and made from Angular Material.
 
 The table and tree categories are filled and listed with mock data at this point.
+
+#### Changing some features of search box and table of data (~ 6 hours)
+The page structure is changed in this step:
+
+* Search fields are moved to the top of the table box. Search fields provide separate searching of tables and columns.
+  Also, each field (column) is searched based on its data type, e.g. string, number, date, etc.
+* Table box content is made dynamic so that by changing the tableData parameter in eclassService.ts file,
+  the header and data of the table will be changed accordingly.
+* A method is added for getting table fields (column) names.
+* A method is added for getting structured data which then the filter will be added to it,
+  to get structured data from the back-end.
