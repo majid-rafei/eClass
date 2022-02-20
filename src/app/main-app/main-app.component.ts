@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainAppComponent implements OnInit {
 
-    title = 'dundts';
+    title = 'dundts_frontend';
 
     constructor() {
     }
