@@ -2,7 +2,19 @@
     
 }
 .search-field-box {
-    padding: 0 10px;
     display: inline-block;
+    padding: 0 10px;
     font-size: 15px;
+}
+
+.search-btn {
+    display: block;
+    height: 55px;
+    margin-left: 10px;
+}
+
+.search-box {
+    height: 155px;
+    overflow: auto;
+    text-align: left;
 }

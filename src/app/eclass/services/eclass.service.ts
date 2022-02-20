@@ -3,36 +3,7 @@ import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {HttpClient} from "@angular/common/http";
 import {environment} from 'src/environments/environment';
-import {FieldType} from "../interfaces/interface";
-
-export interface TableData {
-    category: string;
-    property: string;
-    value: number;
-    unit: string;
-}
-
-export interface Dict {
-    v: boolean;
-    q: string;
-}
-
-export interface Filters {
-    text: string,
-    fields: [],
-}
-
-interface TableNode {
-    name: string;
-    data: [];
-    children: TableNode[];
-}
-
-export interface FilterType {
-    n: string,
-    v: false,
-    q: string,
-}
+import {EclassSh, FieldType, Filters, TableNode} from "../interfaces/interface";
 
 @Injectable()
 export class EclassService {
@@ -44,18 +15,22 @@ export class EclassService {
         {'test1': 3, 'test2': 4},
     ];
     ft = FieldType;
-    
+    /**
+     * These fields contain table column names for searching and filtering
+     */
     clFields = [];
     prFields = [];
     vaFields = [];
     unFields = [];
-    
-    filters: any = {
-        text: '',
-        cl: {n: 'Class', v: false, q: ''},
-        pr: {n: 'Property', v: false, q: ''},
-        va: {n: 'Value', v: false, q: ''},
-        un: {n: 'Unit', v: false, q: ''},
+    /**
+     * Is for filters.
+     */
+    filters: Filters = {
+        'tx': '',
+        'cl': {c: '', q: ''},
+        'pr': {c: '', q: ''},
+        'va': {c: '', q: ''},
+        'un': {c: '', q: ''},
     };
     
     treeControl = new NestedTreeControl<TableNode>(node => node.children);
@@ -69,14 +44,18 @@ export class EclassService {
     ) {
         this._getFields();
         this._getDataStructure();
-        this._initializeFilters();
         this.ft = FieldType;
     }
     
     private _getDataStructure() {
+        /**
+         * TODO: Filters should be prepared before adding as param to the GET request.
+         */
+        let url = this.baseUrl + 'eclass/getDataStructure'
+            + '?filters=' + JSON.stringify(this.filters);
         return this.http
             .get(
-                this.baseUrl + 'eclass/getDataStructure',
+                url,
                 {
                     responseType: "json",
                     observe: 'response'
@@ -100,19 +79,25 @@ export class EclassService {
         console.log($event);
     }
     
-    private _initializeFilters() {
-        this.filters.text = '';
-        this.filters.cl = {n: 'Class', v: false, q: ''}
-        this.filters.pr = {n: 'Property', v: false, q: ''}
-        this.filters.va = {n: 'Value', v: false, q: ''}
-        this.filters.un = {n: 'Unit', v: false, q: ''}
-        return;
-    }
-    
-    setFilter($event: any, type: string) {
-        this.filters[type] = {
-            col: $event.col,
-            q: $event.q,
+    /**
+     * TODO: It is strange that here this.filters[_type] doesnt work! Needs considerations.
+     * @param $event
+     * @param _type
+     */
+    setFilter($event: any, _type: string) {
+        switch (_type) {
+            case EclassSh.CL:
+                this.filters[EclassSh.CL] = {c: $event.c, q: $event.q};
+                break;
+            case EclassSh.PR:
+                this.filters[EclassSh.PR] = {c: $event.c, q: $event.q};
+                break;
+            case EclassSh.VA:
+                this.filters[EclassSh.VA] = {c: $event.c, q: $event.q};
+                break;
+            case EclassSh.UN:
+                this.filters[EclassSh.UN] = {c: $event.c, q: $event.q};
+                break;
         }
     }
     
@@ -124,5 +109,9 @@ export class EclassService {
                 this.vaFields = resp.va;
                 this.unFields = resp.un;
             })
+    }
+    
+    search() {
+        this._getDataStructure();
     }
 }

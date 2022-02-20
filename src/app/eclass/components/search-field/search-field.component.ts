@@ -10,25 +10,32 @@ export class SearchFieldComponent implements OnInit, AfterViewInit {
     
     @Input() fields: any;
     @Input() type: string = '';
-    @Output() selectedField: any = new EventEmitter();
+    @Output() searchData: any = new EventEmitter();
     
-    allField = {
+    selectedField: any;
+    allField: any = {
         col: 'all',
         type: FieldType.String,
-    }
+    };
     
     ft = FieldType;
+    q: string = '';
     
     constructor() {
+        this.selectedField = this.allField;
     }
     
     ngOnInit(): void {
     }
     
     ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.selectedField = this.allField;
-        }, 50)
     }
     
+    emitSelectedField($event: any) {
+        let e = {
+            c: this.selectedField.col,
+            q: this.q,
+        }
+        this.searchData.emit(e);
+    }
 }

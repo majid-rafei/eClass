@@ -1,44 +1,42 @@
 <form>
-    <div class="search-field-box">
-        <app-search-field
-                [type]="'Class'"
-                [fields]="eclassService.clFields"
-                (selectedField)="eclassService.setFilter($event, 'cl')"
-        ></app-search-field>
+    <div class="search-box">
+        <div class="search-field-box">
+            <app-search-field
+                    [type]="Eclass.AL"
+                    [fields]="[]"
+                    (searchData)="eclassService.setFilter($event, EclassSh.AL)"
+            ></app-search-field>
+        </div>
+        <div class="search-field-box">
+            <app-search-field
+                    [type]="Eclass.CL"
+                    [fields]="eclassService.clFields"
+                    (searchData)="eclassService.setFilter($event, EclassSh.CL)"
+            ></app-search-field>
+        </div>
+        <div class="search-field-box">
+            <app-search-field
+                    [type]="Eclass.PR"
+                    [fields]="eclassService.prFields"
+                    (searchData)="eclassService.setFilter($event, EclassSh.PR)"
+            ></app-search-field>
+        </div>
+        <div class="search-field-box">
+            <app-search-field
+                    [type]="Eclass.VA"
+                    [fields]="eclassService.vaFields"
+                    (searchData)="eclassService.setFilter($event, EclassSh.VA)"
+            ></app-search-field>
+        </div>
+        <div class="search-field-box">
+            <app-search-field
+                    [type]="Eclass.UN"
+                    [fields]="eclassService.unFields"
+                    (searchData)="eclassService.setFilter($event, EclassSh.UN)"
+            ></app-search-field>
+        </div>
     </div>
-    <div class="search-field-box">
-        <app-search-field
-                [type]="'Property'"
-                [fields]="eclassService.prFields"
-                (selectedField)="eclassService.setFilter($event, 'pr')"
-        ></app-search-field>
-    </div>
-    <div class="search-field-box">
-        <app-search-field
-                [type]="'Value'"
-                [fields]="eclassService.vaFields"
-                (selectedField)="eclassService.setFilter($event, 'va')"
-        ></app-search-field>
-    </div>
-    <div class="search-field-box">
-        <app-search-field
-                [type]="'Unit'"
-                [fields]="eclassService.unFields"
-                (selectedField)="eclassService.setFilter($event, 'un')"
-        ></app-search-field>
-    </div>
-<!--    <div class="search-checkbox">-->
-<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.cl" [name]="eclassService.filters.cl.n">-->
-<!--            {{eclassService.filters.cl.n}}-->
-<!--        </mat-checkbox>-->
-<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.pr" [name]="eclassService.filters.pr.n">-->
-<!--            {{eclassService.filters.pr.n}}-->
-<!--        </mat-checkbox>-->
-<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.va" [name]="eclassService.filters.va.n">-->
-<!--            {{eclassService.filters.va.n}}-->
-<!--        </mat-checkbox>-->
-<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.un" [name]="eclassService.filters.un.n">-->
-<!--            {{eclassService.filters.un.n}}-->
-<!--        </mat-checkbox>-->
-<!--    </div>-->
+    <button class="search-btn mat-primary" mat-stroked-button (click)="eclassService.search()">
+        <span>Search</span>
+    </button>
 </form>

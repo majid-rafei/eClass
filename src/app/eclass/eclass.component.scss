@@ -1,5 +1,6 @@
 .eclass-header {
     grid-area: header;
+    max-height: 100px;
     
     .header-item {
         display: inline-block;
@@ -23,12 +24,17 @@
 
 .eclass-tree {
     grid-area: tree;
+    padding: 20px !important;
+    height: 600px;
+    overflow-y: auto;
+    min-width: 100px;
 }
 
 .eclass-main {
     grid-area: main;
-    height: 700px;
+    max-height: 200px;
     overflow: auto;
+    padding: 10px 10px !important;
 }
 
 .eclass-footer {
@@ -38,9 +44,9 @@
 .eclass-grid-container {
     display: grid;
     grid-template-areas:
-    'header header  header  header  header  header'
-    'search search  search  search  search  search'
-    'tree   main    main    main    main    main'
+    'tree header  header  header  header header'
+    'tree search  search  search  search search'
+    'tree   main    main    main    main main'
     //'footer footer footer footer footer footer';
   ;
     gap: 10px;

@@ -1,3 +1,6 @@
+<div class="title-box">
+    <span>Tree of structured data:</span>
+</div>
 <mat-tree [dataSource]="eclassService.treeDataSource" [treeControl]="eclassService.treeControl" class="table-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
         <span (click)="eclassService.filterTable(node.code)">{{node.name}}</span>

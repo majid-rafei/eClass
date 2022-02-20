@@ -1,6 +1,6 @@
-<mat-form-field appearance="fill">
-    <mat-label>{{type}} Field</mat-label>
-    <mat-select [(ngModel)]="selectedField" name="field">
+<mat-form-field appearance="fill" class="block">
+    <mat-label>{{type | titlecase}} Field</mat-label>
+    <mat-select [(ngModel)]="selectedField" name="field" (ngModelChange)="emitSelectedField($event)">
         <mat-option [value]="allField">All Fields</mat-option>
         <mat-option *ngFor="let field of fields" [value]="field">
             {{field.col}}
@@ -8,20 +8,20 @@
     </mat-select>
 </mat-form-field>
 <ng-container *ngIf="selectedField.type == ft.String">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="block">
         <mat-label>Search in {{selectedField.col}}</mat-label>
-        <input matInput placeholder="Search in all fields as text" value="">
+        <input matInput placeholder="Search in all fields as text" value="" [(ngModel)]="q" (change)="emitSelectedField($event)">
     </mat-form-field>
 </ng-container>
 <ng-container *ngIf="selectedField.type == ft.Number">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="block">
         <mat-label>Search in {{selectedField.col}}</mat-label>
-        <input type="number" matInput placeholder="">
+        <input type="number" matInput placeholder="" [(ngModel)]="q" (change)="emitSelectedField($event)">
     </mat-form-field>
 </ng-container>
 <ng-container *ngIf="selectedField.type == ft.Date">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="block">
         <mat-label>Search in {{selectedField.col}}</mat-label>
-        <input type="date" matInput placeholder="">
+        <input type="date" matInput placeholder="" (change)="emitSelectedField($event)">
     </mat-form-field>
 </ng-container>

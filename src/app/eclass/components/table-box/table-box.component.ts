@@ -1,7 +1,8 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {EclassService, TableData} from "../../services/eclass.service";
+import {EclassService} from "../../services/eclass.service";
 import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {TableData} from "../../interfaces/interface";
 
 @Component({
     selector: 'app-table-box',
