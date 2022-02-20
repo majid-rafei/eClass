@@ -7,14 +7,19 @@
         </div>
         <div class="header-item import-csv-button">
             <div class="box-content">
-                <button mat-stroked-button (click)="eclassService.importCsv()">Import CSV file</button>
+                <button mat-stroked-button (click)="openFile()">
+                    <span>Import CSV file</span>
+                    <input type="file" style="display: none" (change)="daoService.getCsvFile($event)" accept="text/csv,application/json">
+                </button>
             </div>
         </div>
     </div>
-    <div class="eclass-menu">
+    <div class="eclass-search">
         <div class="search-box">
             <app-search-box></app-search-box>
         </div>
+    </div>
+    <div class="eclass-tree">
         <div class="tree-box">
             <app-tree-box></app-tree-box>
         </div>

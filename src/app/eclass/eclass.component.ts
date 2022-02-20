@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {EclassService} from "./eclass.service";
+import {EclassService} from "./services/eclass.service";
+import {DaoService} from "./services/dao.service";
 
 @Component({
     selector: 'app-eclass',
@@ -9,11 +10,16 @@ import {EclassService} from "./eclass.service";
 export class EclassComponent implements OnInit {
 
     constructor(
-        public eclassService: EclassService
+        public eclassService: EclassService,
+        public daoService: DaoService,
     ) {
     }
 
     ngOnInit(): void {
     }
-
+    
+    openFile() {
+        let inputElement = document.querySelector('input');
+        inputElement && inputElement.click();
+    }
 }
