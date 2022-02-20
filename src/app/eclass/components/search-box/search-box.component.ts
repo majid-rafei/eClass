@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {EclassService} from "../eclass.service";
+import {EclassService} from "../../services/eclass.service";
 
 @Component({
   selector: 'app-search-box',

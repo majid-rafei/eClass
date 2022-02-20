@@ -1,0 +1,44 @@
+<form>
+    <div class="search-field-box">
+        <app-search-field
+                [type]="'Class'"
+                [fields]="eclassService.clFields"
+                (selectedField)="eclassService.setFilter($event, 'cl')"
+        ></app-search-field>
+    </div>
+    <div class="search-field-box">
+        <app-search-field
+                [type]="'Property'"
+                [fields]="eclassService.prFields"
+                (selectedField)="eclassService.setFilter($event, 'pr')"
+        ></app-search-field>
+    </div>
+    <div class="search-field-box">
+        <app-search-field
+                [type]="'Value'"
+                [fields]="eclassService.vaFields"
+                (selectedField)="eclassService.setFilter($event, 'va')"
+        ></app-search-field>
+    </div>
+    <div class="search-field-box">
+        <app-search-field
+                [type]="'Unit'"
+                [fields]="eclassService.unFields"
+                (selectedField)="eclassService.setFilter($event, 'un')"
+        ></app-search-field>
+    </div>
+<!--    <div class="search-checkbox">-->
+<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.cl" [name]="eclassService.filters.cl.n">-->
+<!--            {{eclassService.filters.cl.n}}-->
+<!--        </mat-checkbox>-->
+<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.pr" [name]="eclassService.filters.pr.n">-->
+<!--            {{eclassService.filters.pr.n}}-->
+<!--        </mat-checkbox>-->
+<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.va" [name]="eclassService.filters.va.n">-->
+<!--            {{eclassService.filters.va.n}}-->
+<!--        </mat-checkbox>-->
+<!--        <mat-checkbox class="checkbox-box" [(ngModel)]="eclassService.filters.un" [name]="eclassService.filters.un.n">-->
+<!--            {{eclassService.filters.un.n}}-->
+<!--        </mat-checkbox>-->
+<!--    </div>-->
+</form>
