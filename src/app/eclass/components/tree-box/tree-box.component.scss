@@ -10,11 +10,12 @@
 }
 
 .table-tree .mat-nested-tree-node div[role=group] {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 
 .table-tree div[role=group] > .mat-tree-node {
-    padding-left: 40px;
+    padding-left: 20px;
+    min-height: 35px;
 }
 
 .title-box {
@@ -25,6 +26,7 @@
 }
 
 .tree-node-label {
+    text-align: left;
     cursor: pointer;
 }
 
