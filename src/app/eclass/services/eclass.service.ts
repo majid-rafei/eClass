@@ -98,6 +98,9 @@ export class EclassService {
      */
     setFilter($event: any, _type: string) {
         switch (_type) {
+            case EclassSh.AL:
+                this.filters['tx'] = $event.q;
+                break;
             case EclassSh.CL:
                 this.filters[EclassSh.CL] = {c: $event.c, q: $event.q};
                 break;

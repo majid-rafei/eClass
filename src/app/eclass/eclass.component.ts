@@ -8,7 +8,9 @@ import {DaoService} from "./services/dao.service";
     styleUrls: ['./eclass.component.scss']
 })
 export class EclassComponent implements OnInit {
-
+    
+    pageTitle: string = 'E-Class Search and Explore App';
+    
     constructor(
         public eclassService: EclassService,
         public daoService: DaoService,

@@ -24,7 +24,7 @@
 
 .eclass-tree {
     grid-area: tree;
-    padding: 20px !important;
+    padding: 0 20px !important;
     height: 600px;
     overflow-y: auto;
     min-width: 100px;
@@ -44,7 +44,7 @@
 .eclass-grid-container {
     display: grid;
     grid-template-areas:
-    'tree header  header  header  header header'
+    'header header  header  header  header header'
     'tree search  search  search  search search'
     'tree   main    main    main    main main'
     //'footer footer footer footer footer footer';
