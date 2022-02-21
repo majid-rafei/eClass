@@ -1,6 +1,8 @@
 .eclass-header {
     grid-area: header;
     max-height: 100px;
+    background-color: #1976d2 !important;
+    color: white !important;
     
     .header-item {
         display: inline-block;
@@ -28,6 +30,7 @@
     height: 600px;
     overflow-y: auto;
     min-width: 100px;
+    background-color: #fafafa !important;
 }
 
 .eclass-main {
@@ -68,7 +71,6 @@
 .header-title {
     font-size: 25px;
     line-height: 30px;
-    color: grey;
 }
 
 //::-webkit-scrollbar {
