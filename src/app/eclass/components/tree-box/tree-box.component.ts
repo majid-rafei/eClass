@@ -8,6 +8,8 @@ import {EclassService} from "../../services/eclass.service";
 })
 export class TreeBoxComponent implements OnInit {
     
+    activeNode: any;
+    
     constructor(
         public eclassService: EclassService
     ) {

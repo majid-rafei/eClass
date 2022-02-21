@@ -3,7 +3,10 @@
 </div>
 <mat-tree [dataSource]="eclassService.treeDataSource" [treeControl]="eclassService.treeControl" class="table-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-        <span (click)="eclassService.filterTable(node.code)">{{node.name}}</span>
+        <span class="tree-node-label"
+              (click)="eclassService.filterTable(node); activeNode = node"
+              [ngClass]="{ 'background-highlight': activeNode === node }"
+        >{{node.name}}</span>
     </mat-tree-node>
     <mat-nested-tree-node *matTreeNodeDef="let node; when: eclassService.hasChild">
         <div class="mat-tree-node">
@@ -13,7 +16,10 @@
                     {{eclassService.treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
             </button>
-            <span (click)="eclassService.filterTable(node.code)">{{node.name}}</span>
+            <span class="nested-tree-node-label"
+                  (click)="eclassService.filterTable(node); activeNode = node"
+                  [ngClass]="{ 'background-highlight': activeNode === node }"
+            >{{node.name}}</span>
         </div>
         <div [class.table-tree-invisible]="!eclassService.treeControl.isExpanded(node)" role="group">
             <ng-container matTreeNodeOutlet></ng-container>

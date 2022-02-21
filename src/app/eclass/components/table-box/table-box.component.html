@@ -1,6 +1,6 @@
-<!--<div class="table-title">-->
-<!--    {{eclassService.tableTitle}}-->
-<!--</div>-->
+<div class="table-title">
+    {{eclassService.tableTitle}}
+</div>
 <div class="table mat-elevation-z8">
     <table mat-table [dataSource]="eclassService.tableData" class="mat-elevation-z8">
         <ng-container *ngFor="let col of eclassService.tableHeader">
@@ -9,7 +9,7 @@
                 <td mat-cell *matCellDef="let element"> {{element[col]}} </td>
             </ng-container>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="eclassService.tableHeader"></tr>
+        <tr mat-header-row *matHeaderRowDef="eclassService.tableHeader; sticky: true;"></tr>
         <tr mat-row *matRowDef="let row; columns: eclassService.tableHeader;"></tr>
     </table>
 </div>

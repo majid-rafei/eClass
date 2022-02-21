@@ -42,6 +42,7 @@ export interface Filters {
 
 export interface TableNode {
     name: string;
+    type: string;
     data: [];
     children: TableNode[];
 }
@@ -50,4 +51,9 @@ export interface FilterType {
     n: string,
     v: false,
     q: string,
+}
+
+export interface TableField {
+    col: string,
+    type: string,
 }

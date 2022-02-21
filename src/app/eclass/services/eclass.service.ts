@@ -3,25 +3,22 @@ import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {HttpClient} from "@angular/common/http";
 import {environment} from 'src/environments/environment';
-import {EclassSh, FieldType, Filters, TableNode} from "../interfaces/interface";
+import {Eclass, EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/interface";
 
 @Injectable()
 export class EclassService {
     
-    tableTitle: string = 'sample-table';
-    tableHeader: string[] = ['test1', 'test2'];
-    tableData: any[] = [
-        {'test1': 1, 'test2': 2},
-        {'test1': 3, 'test2': 4},
-    ];
+    tableTitle: string = '';
+    tableHeader: string[] = [];
+    tableData: any[] = [];
     ft = FieldType;
     /**
      * These fields contain table column names for searching and filtering
      */
-    clFields = [];
-    prFields = [];
-    vaFields = [];
-    unFields = [];
+    clFields: TableField[] = [];
+    prFields: TableField[] = [];
+    vaFields: TableField[] = [];
+    unFields: TableField[] = [];
     /**
      * Is for filters.
      */
@@ -48,14 +45,14 @@ export class EclassService {
     }
     
     private _getDataStructure() {
+        this._resetTableData();
         /**
          * TODO: Filters should be prepared before adding as param to the GET request.
          */
         let url = this.baseUrl + 'eclass/getDataStructure'
             + '?filters=' + JSON.stringify(this.filters);
         return this.http
-            .get(
-                url,
+            .get(url,
                 {
                     responseType: "json",
                     observe: 'response'
@@ -75,8 +72,23 @@ export class EclassService {
         return true;
     }
     
-    filterTable($event: any) {
-        console.log($event);
+    filterTable(node: TableNode) {
+        this.tableData = Array.of(node.data);
+        this.tableTitle = node.name;
+        switch (node.type) {
+            case EclassSh.CL:
+                this.tableHeader = this._getTableHeaders(this.clFields);
+                break;
+            case EclassSh.PR:
+                this.tableHeader = this._getTableHeaders(this.prFields);
+                break;
+            case EclassSh.VA:
+                this.tableHeader = this._getTableHeaders(this.vaFields);
+                break;
+            case EclassSh.UN:
+                this.tableHeader = this._getTableHeaders(this.unFields);
+                break;
+        }
     }
     
     /**
@@ -113,5 +125,19 @@ export class EclassService {
     
     search() {
         this._getDataStructure();
+    }
+    
+    private _getTableHeaders(fields: TableField[]): string[] {
+        let cols = [];
+        for (let field of fields) {
+            cols.push(field.col)
+        }
+        return cols;
+    }
+    
+    private _resetTableData() {
+        this.tableTitle = '';
+        this.tableHeader = [];
+        this.tableData = [];
     }
 }
