@@ -29,6 +29,7 @@ Installation of the angular app is done using the following command:
 ng new dundts_frontend
 ```
 which creates a project by the name ''dundts''.
+**Hint**: For back-end please deploy the back-end app from [here](https://github.com/majid-rafei/eClassBackEnd)
 
 ### Step 2: Creation of main-app module (~ 1 hour)
 
