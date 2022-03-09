@@ -3,7 +3,7 @@ import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {HttpClient} from "@angular/common/http";
 import {environment} from 'src/environments/environment';
-import {Eclass, EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/interface";
+import {EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/interface";
 
 @Injectable()
 export class EclassService {
@@ -46,20 +46,34 @@ export class EclassService {
     
     private _getDataStructure() {
         this._resetTableData();
+        let filters =
+            `clc=${this.filters.cl.c}&`
+            +`clq=${this.filters.cl.q}&`
+            +`prc=${this.filters.pr.c}&`
+            +`prq=${this.filters.pr.q}&`
+            +`vac=${this.filters.va.c}&`
+            +`vaq=${this.filters.va.q}&`
+            +`unc=${this.filters.un.c}&`
+            +`unq=${this.filters.un.q}`
+        ;
         /**
          * TODO: Filters should be prepared before adding as param to the GET request.
          */
-        let url = this.baseUrl + 'eclass/getDataStructure'
-            + '?filters=' + JSON.stringify(this.filters);
+        let url = this.baseUrl + 'eclass/getStructuredData'
+            + '?' + filters;
         return this.http
-            .get(url,
-                {
+            .get(url, {
                     responseType: "json",
                     observe: 'response'
                 }
             )
             .subscribe((resp: any) => {
-                this.treeDataSource = resp.body;
+                if (resp.body.done) {
+                    this.treeDataSource = resp.body.data.items;
+                }
+                else {
+                    alert(resp.body.msg);
+                }
             });
     }
     
@@ -75,7 +89,7 @@ export class EclassService {
     filterTable(node: TableNode) {
         this.tableData = Array.of(node.data);
         this.tableTitle = node.name;
-        switch (node.type) {
+        switch (node.type.toLowerCase()) {
             case EclassSh.CL:
                 this.tableHeader = this._getTableHeaders(this.clFields);
                 break;
@@ -97,7 +111,7 @@ export class EclassService {
      * @param _type
      */
     setFilter($event: any, _type: string) {
-        switch (_type) {
+        switch (_type.toLowerCase()) {
             case EclassSh.AL:
                 this.filters['tx'] = $event.q;
                 break;
@@ -117,12 +131,23 @@ export class EclassService {
     }
     
     private _getFields() {
-        this.http.get(this.baseUrl + 'eclass/getFields')
+        this.http
+            .get(
+                this.baseUrl + 'eclass/getFields',{
+                responseType: "json",
+                observe: 'response'
+            })
             .subscribe((resp: any) => {
-                this.clFields = resp.cl;
-                this.prFields = resp.pr;
-                this.vaFields = resp.va;
-                this.unFields = resp.un;
+                if (resp.body.done) {
+                    let items = resp.body.data.items;
+                    this.clFields = items.cl;
+                    this.prFields = items.pr;
+                    this.vaFields = items.va;
+                    this.unFields = items.un;
+                }
+                else {
+                    alert(resp.body.msg);
+                }
             })
     }
     

@@ -9,7 +9,7 @@ export enum Eclass {
     PR = 'property',
     VA = 'value',
     UN = 'unit',
-    AL = 'all',
+    AL = '___all___',
 }
 
 export enum EclassSh {

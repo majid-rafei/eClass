@@ -18,6 +18,14 @@ import {DaoService} from "./services/dao.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import {MatSelectModule} from "@angular/material/select";
+import { HeaderBoxComponent } from './components/header-box/header-box.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatCardModule} from "@angular/material/card";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -27,6 +35,7 @@ import {MatSelectModule} from "@angular/material/select";
         TableBoxComponent,
         SearchBoxComponent,
         SearchFieldComponent,
+        HeaderBoxComponent,
     ],
     imports: [
         CommonModule,
@@ -42,6 +51,13 @@ import {MatSelectModule} from "@angular/material/select";
         MatIconModule,
         HttpClientModule,
         MatSelectModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatGridListModule,
+        MatTabsModule,
+        MatExpansionModule,
     ],
     providers: [
         EclassService,

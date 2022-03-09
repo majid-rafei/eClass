@@ -4,11 +4,11 @@ import {RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: () => import('./main-app/main-app.module').then(m => m.MainAppModule)
+        loadChildren: () => import('./lib/modules/main-app/main-app.module').then(m => m.MainAppModule)
     },
     {
         path: 'eclass',
-        loadChildren: () => import('./eclass/eclass.module').then(m => m.EclassModule)
+        loadChildren: () => import('./lib/modules/eclass/eclass.module').then(m => m.EclassModule)
     },
 ];
 

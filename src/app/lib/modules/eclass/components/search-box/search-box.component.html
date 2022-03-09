@@ -1,0 +1,37 @@
+<mat-card class="search-box-container">
+    <mat-card-content>
+        <div class="search-box">
+            <div class="search-field-box">
+                <app-search-field
+                        [type]="Eclass.CL"
+                        [fields]="eclassService.clFields"
+                        (searchData)="eclassService.setFilter($event, EclassSh.CL)"
+                ></app-search-field>
+            </div>
+            <div class="search-field-box">
+                <app-search-field
+                        [type]="Eclass.PR"
+                        [fields]="eclassService.prFields"
+                        (searchData)="eclassService.setFilter($event, EclassSh.PR)"
+                ></app-search-field>
+            </div>
+            <div class="search-field-box">
+                <app-search-field
+                        [type]="Eclass.VA"
+                        [fields]="eclassService.vaFields"
+                        (searchData)="eclassService.setFilter($event, EclassSh.VA)"
+                ></app-search-field>
+            </div>
+            <div class="search-field-box">
+                <app-search-field
+                        [type]="Eclass.UN"
+                        [fields]="eclassService.unFields"
+                        (searchData)="eclassService.setFilter($event, EclassSh.UN)"
+                ></app-search-field>
+            </div>
+        </div>
+    </mat-card-content>
+    <button class="search-btn mat-primary" mat-stroked-button (click)="eclassService.search()">
+        <span>Search</span>
+    </button>
+</mat-card>

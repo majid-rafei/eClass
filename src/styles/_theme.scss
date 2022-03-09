@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@import "variables";
+
+.dark-theme {
+    height: 100%;
+    width: 100%;
+    
+    $theme: mat.$brown-palette;
+    $my-primary: mat.define-palette($theme, 500);
+    $my-accent: mat.define-palette($theme, A200, A100, A400);
+    $my-warn: mat.define-palette($theme, A200, A100, A400);
+    
+    $my-theme: mat.define-light-theme((
+            color: (
+                    primary: $my-primary,
+                    accent: $my-accent,
+                    warn: $my-warn
+            ),
+            typography: mat.define-typography-config(
+                    $font-family: serif,
+            )
+    ));
+    
+    @include mat.all-component-themes($my-theme);
+}
+
+.light-theme {
+    height: 100%;
+    width: 100%;
+    
+    $theme: mat.$blue-grey-palette;
+    $my-primary: mat.define-palette($theme, 500);
+    $my-accent: mat.define-palette($theme, A200, A100, A400);
+    $my-warn: mat.define-palette($theme, A200, A100, A400);
+    
+    $my-theme: mat.define-light-theme((
+            color: (
+                    primary: $my-primary,
+                    accent: $my-accent,
+                    warn: $my-warn
+            ),
+            typography: mat.define-typography-config(
+                    $font-family: serif,
+            )
+    ));
+    
+    @include mat.all-component-themes($my-theme);
+}

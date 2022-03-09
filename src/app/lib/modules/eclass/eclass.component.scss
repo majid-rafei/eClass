@@ -1,0 +1,45 @@
+@import 'src/styles/variables';
+
+div {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+/**
+Desktop View Styles
+ */
+.eclass-desktop {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    direction: ltr;
+}
+
+.app-toolbar {
+    z-index: 10;
+    box-shadow: 0 2px 5px #0000004d;
+}
+.mat-sidenav {
+    //width: $sidenav-width;
+}
+.mat-sidenav-container {
+    height: 100%;
+}
+@media screen and (min-width: 864px) {
+    .eclass-mobile {
+        display: none;
+    }
+}
+/**
+Mobile View Styles
+ */
+.mat-tab-group-mobile {
+    height: 350px;
+}
+
+@media screen and (max-width: 864px) {
+    .eclass-desktop {
+        display: none;
+    }
+}
+

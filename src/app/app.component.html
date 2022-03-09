@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<div [ngClass]="(isDarkTheme | async) ? 'dark-theme' : 'light-theme'">
+    <router-outlet></router-outlet>
+</div>
