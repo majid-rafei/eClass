@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {EclassService} from "../../services/eclass.service";
 import {MatTableDataSource} from '@angular/material/table';
-import {TableData} from "../../interfaces/interface";
+import {TableData} from "../../interfaces/eclass.interface";
 
 @Component({
     selector: 'app-table-box',

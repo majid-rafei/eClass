@@ -6,7 +6,7 @@
 @import "variables";
 
 .dark-theme {
-    height: 100%;
+    height: calc(100% - 65px);
     width: 100%;
     
     $theme: mat.$brown-palette;
@@ -29,7 +29,7 @@
 }
 
 .light-theme {
-    height: 100%;
+    height: calc(100% - 65px);
     width: 100%;
     
     $theme: mat.$blue-grey-palette;

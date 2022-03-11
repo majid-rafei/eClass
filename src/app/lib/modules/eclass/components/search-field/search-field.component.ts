@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import {FieldType} from "../../interfaces/interface";
+import {FieldType} from "../../interfaces/eclass.interface";
 
 @Component({
     selector: 'app-search-field',

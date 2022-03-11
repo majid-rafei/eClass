@@ -10,6 +10,10 @@ const routes: Routes = [
         path: 'eclass',
         loadChildren: () => import('./lib/modules/eclass/eclass.module').then(m => m.EclassModule)
     },
+    {
+        path: 'auth',
+        loadChildren: () => import('./lib/modules/auth/auth.module').then(m => m.AuthModule)
+    },
 ];
 
 @NgModule({

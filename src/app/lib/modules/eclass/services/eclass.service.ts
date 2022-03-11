@@ -3,7 +3,7 @@ import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
 import {HttpClient} from "@angular/common/http";
 import {environment} from 'src/environments/environment';
-import {EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/interface";
+import {EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/eclass.interface";
 
 @Injectable()
 export class EclassService {
@@ -139,7 +139,7 @@ export class EclassService {
             })
             .subscribe((resp: any) => {
                 if (resp.body.done) {
-                    let items = resp.body.data.items;
+                    let items = resp.body.data.item;
                     this.clFields = items.cl;
                     this.prFields = items.pr;
                     this.vaFields = items.va;

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EclassService} from "../../services/eclass.service";
-import {Eclass, EclassSh} from "../../interfaces/interface";
+import {Eclass, EclassSh} from "../../interfaces/eclass.interface";
 import {DaoService} from "../../services/dao.service";
 
 @Component({

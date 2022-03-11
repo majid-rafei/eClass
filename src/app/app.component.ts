@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ThemeService} from "./core/services/theme.service";
-import {Observable} from "rxjs";
+import {AuthService} from "./core/services/auth.service";
 
 @Component({
     selector: 'app-root',
@@ -8,10 +8,39 @@ import {Observable} from "rxjs";
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    isDarkTheme: Observable<boolean>;
+    
+    isDarkTheme: boolean = false;
+    isLoggedIn: boolean = false;
+    
     constructor(
-        public themeService: ThemeService
+        private themeService: ThemeService,
+        private authService: AuthService,
     ) {
-        this.isDarkTheme = this.themeService.isDarkTheme;
+        this.themeService.isDarkTheme$.subscribe((isDarkTheme: boolean) => {
+            this.isDarkTheme = isDarkTheme;
+        })
+        this.themeService.checkDarkTheme();
+        this.authService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+            this.isLoggedIn = isLoggedIn;
+        });
+        this.authService.checkIsLoggedIn();
+    }
+    
+    /**
+     * Toggles theme.
+     * @param checked
+     */
+    toggleDarkTheme(checked: boolean) {
+        this.themeService.setDarkTheme(checked);
+    }
+    
+    /**
+     * Logs out the user.
+     */
+    logout() {
+        this.authService.logout()
+            .catch((error: any) => {
+                console.log('Error occurred when trying to Logout:' + error.message);
+            });
     }
 }
