@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../../../core/services/auth.service";
 import {LoginSentInterface} from "../../../../core/interfaces/auth.interface";
 import {CommonService} from "../../../../core/services/common.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -16,13 +17,21 @@ export class LoginComponent implements OnInit {
         password: '',
     }
     
+    private returnUrl: string = '/';
+    
     constructor(
         private authService: AuthService,
         private commonService: CommonService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {
     }
     
     ngOnInit(): void {
+        let returnUrl = this.route.snapshot.queryParams['returnUrl'];
+        if (returnUrl) {
+            this.returnUrl = returnUrl;
+        }
     }
     
     login(loginData: LoginSentInterface): boolean {
@@ -34,7 +43,12 @@ export class LoginComponent implements OnInit {
             alert(`Password length should be at least ${AuthService.passwordLength} character.`);
             return false;
         }
-        this.authService.manageLogin(loginData);
+        this.authService
+            .manageLogin(loginData)
+            .then(() => {
+                this.router.navigate([this.returnUrl]).then(r => {})
+            })
+        ;
         return true;
     }
 }

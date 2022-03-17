@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {LoginGuard} from "./core/guards/login.guard";
 
 const routes: Routes = [
     {
@@ -8,7 +9,10 @@ const routes: Routes = [
     },
     {
         path: 'eclass',
-        loadChildren: () => import('./lib/modules/eclass/eclass.module').then(m => m.EclassModule)
+        loadChildren: () => import('./lib/modules/eclass/eclass.module').then(m => m.EclassModule),
+        canActivate: [
+            LoginGuard,
+        ],
     },
     {
         path: 'auth',

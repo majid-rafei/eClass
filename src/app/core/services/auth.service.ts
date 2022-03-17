@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable, OnDestroy, OnInit} from "@angular/core";
 import {Router} from '@angular/router';
 import {LoginSentInterface} from "../interfaces/auth.interface";
 import {ResponseInterface} from "../interfaces/response.interface";
@@ -21,8 +21,8 @@ export class AuthService implements OnDestroy {
      * _isLoggedIn and _isLoggedIn$ are private properties and their value changes only from within this class.
      * @private
      */
-    private _isLoggedIn = new Subject<boolean>();
-    isLoggedIn$ = this._isLoggedIn.asObservable();
+    public _isLoggedIn = new Subject<boolean>();
+    public isLoggedIn$ = this._isLoggedIn.asObservable();
     
     constructor(
         private http: HttpService,
@@ -45,7 +45,7 @@ export class AuthService implements OnDestroy {
                 const tkn = body.data.item;
                 this._setTokenToLocalStorage(tkn.accessToken, tkn.refreshToken, Number(tkn.expiresIn));
                 this._isLoggedIn.next(true);
-                this.router.navigate(['/']).then(r => {})
+                return true;
             })
         ;
     }
@@ -114,18 +114,18 @@ export class AuthService implements OnDestroy {
     
     /**
      * Checks if is logged in.
+     * return: Boolean
      */
-    checkIsLoggedIn(): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            try {
-                const tkn = this._getTokenFromLocalStorage();
-                if (tkn.accessToken && Number(tkn.expiresIn) > moment.now()) {
-                    this._isLoggedIn.next(true);
-                    resolve(true);
-                }
-            } catch (e: any) {
-                reject(e.message)
+    checkIsLoggedIn(): boolean | string {
+        try {
+            const tkn = this._getTokenFromLocalStorage();
+            if (tkn.accessToken && Number(tkn.expiresIn) > moment.now()) {
+                this._isLoggedIn.next(true);
+                return true;
             }
-        })
+            return false;
+        } catch (e: any) {
+            return e.message;
+        }
     }
 }
