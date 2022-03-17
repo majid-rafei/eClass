@@ -47,7 +47,7 @@ export class HttpService {
      * @param url
      * @param withToken
      */
-    public post(body: any, url: string, withToken: boolean = true): Promise<any> {
+    public post(url: string, body: any, withToken: boolean = true): Promise<any> {
         const _url: string = this.baseUrl + url;
         let _headers: HttpHeaders = new HttpHeaders();
         _headers.set('Content-Type', 'application/json');

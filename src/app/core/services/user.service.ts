@@ -37,7 +37,7 @@ export class UserService {
      */
     public manageRegister(registerData: RegisterDataInterface): Promise<any> {
         return this.http
-            .post(registerData, UserAPIS.USER_REGISTER, false)
+            .post(UserAPIS.USER_REGISTER, registerData, false)
             .then((response: HttpResponse<any>) => {
                 const body: ResponseInterface = Object.assign({}, <any>response.body);
                 if (body.done) {

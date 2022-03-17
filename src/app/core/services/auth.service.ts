@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
      */
     manageLogin(loginData: LoginSentInterface) {
         return this.http
-            .post(loginData, AuthAPIS.AUTHENTICATE, false)
+            .post(AuthAPIS.AUTHENTICATE, loginData, false)
             .then((response: HttpResponse<any>) => {
                 const body: ResponseInterface = Object.assign({}, <any>response.body);
                 const tkn = body.data.item;
