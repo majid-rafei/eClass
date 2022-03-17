@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {MatTreeNestedDataSource} from "@angular/material/tree";
 import {NestedTreeControl} from "@angular/cdk/tree";
-import {HttpClient} from "@angular/common/http";
-import {environment} from 'src/environments/environment';
+import {HttpResponse} from "@angular/common/http";
 import {EclassSh, FieldType, Filters, TableField, TableNode} from "../interfaces/eclass.interface";
+import {EclassAPIS} from "../../../../core/app.api";
+import {HttpService} from "../../../../core/services/http.service";
+import {ResponseInterface} from "../../../../core/interfaces/response.interface";
 
 @Injectable()
 export class EclassService {
@@ -34,17 +36,19 @@ export class EclassService {
     treeDataSource = new MatTreeNestedDataSource<TableNode>();
     hasChild = (_: number, node: TableNode) => !!node.children && node.children.length > 0;
     
-    baseUrl = environment.API_BASE;
-    
     constructor(
-        private http: HttpClient,
+        private http: HttpService,
     ) {
         this._getFields();
         this._getDataStructure();
         this.ft = FieldType;
     }
     
-    private _getDataStructure() {
+    /**
+     * Gets structured data from the `${EclassAPIS.GET_STRUCTURED_DATA}` endpoint.
+     * @private
+     */
+    private _getDataStructure(): Promise<any> {
         this._resetTableData();
         let filters =
             `clc=${this.filters.cl.c}&`
@@ -59,20 +63,17 @@ export class EclassService {
         /**
          * TODO: Filters should be prepared before adding as param to the GET request.
          */
-        let url = this.baseUrl + 'eclass/getStructuredData'
+        let url = EclassAPIS.GET_STRUCTURED_DATA
             + '?' + filters;
         return this.http
-            .get(url, {
-                    responseType: "json",
-                    observe: 'response'
-                }
-            )
-            .subscribe((resp: any) => {
-                if (resp.body.done) {
-                    this.treeDataSource = resp.body.data.items;
+            .get(url)
+            .then((response: HttpResponse<any>) => {
+                const body: ResponseInterface = Object.assign({}, <any>response.body);
+                if (body.done) {
+                    this.treeDataSource.data = body.data.items;
                 }
                 else {
-                    alert(resp.body.msg);
+                    alert(body.msg);
                 }
             });
     }
@@ -86,7 +87,11 @@ export class EclassService {
         return true;
     }
     
-    filterTable(node: TableNode) {
+    /**
+     * Sets table data by the given node object.
+     * @param node
+     */
+    setTableData(node: TableNode) {
         this.tableData = Array.of(node.data);
         this.tableTitle = node.name;
         switch (node.type.toLowerCase()) {
@@ -130,31 +135,40 @@ export class EclassService {
         }
     }
     
+    /**
+     * Gets fields of the all tables of the simple E-Class system
+     * @private
+     */
     private _getFields() {
         this.http
-            .get(
-                this.baseUrl + 'eclass/getFields',{
-                responseType: "json",
-                observe: 'response'
-            })
-            .subscribe((resp: any) => {
-                if (resp.body.done) {
-                    let items = resp.body.data.item;
+            .get(EclassAPIS.GET_FIELDS)
+            .then((response: HttpResponse<any>) => {
+                const body: ResponseInterface = Object.assign({}, <any>response.body);
+                if (body.done) {
+                    let items = body.data.item;
                     this.clFields = items.cl;
                     this.prFields = items.pr;
                     this.vaFields = items.va;
                     this.unFields = items.un;
                 }
                 else {
-                    alert(resp.body.msg);
+                    alert(body.msg);
                 }
             })
     }
     
+    /**
+     * Searches for the given keyword in the given field.
+     */
     search() {
         this._getDataStructure();
     }
     
+    /**
+     * Gets columns of the field objects.
+     * @param fields
+     * @private
+     */
     private _getTableHeaders(fields: TableField[]): string[] {
         let cols = [];
         for (let field of fields) {
@@ -163,6 +177,10 @@ export class EclassService {
         return cols;
     }
     
+    /**
+     * Is to reset table data.
+     * @private
+     */
     private _resetTableData() {
         this.tableTitle = '';
         this.tableHeader = [];

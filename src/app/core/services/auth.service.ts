@@ -7,7 +7,7 @@ import {environment} from "../../../environments/environment";
 import {HttpService} from "./http.service";
 import * as moment from "moment";
 import {Subject} from "rxjs";
-import {APIS} from "../app.api";
+import {AuthAPIS} from "../app.api";
 
 @Injectable({
     providedIn: "root"
@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
      */
     manageLogin(loginData: LoginSentInterface) {
         return this.http
-            .post(loginData, APIS.AUTHENTICATE, false)
+            .post(loginData, AuthAPIS.AUTHENTICATE, false)
             .then((response: HttpResponse<any>) => {
                 const body: ResponseInterface = Object.assign({}, <any>response.body);
                 const tkn = body.data.item;

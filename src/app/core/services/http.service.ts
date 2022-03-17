@@ -17,19 +17,11 @@ export class HttpService {
     
     /**
      * Is the GET method of the HttpClient.
-     * @param params
      * @param url
      * @param withToken
      */
-    get(params: any, url: string, withToken: boolean = true): Observable<any> {
-        let _params: string;
-        try {
-            _params = JSON.parse(params);
-        }
-        catch (error) {
-            throw new Error('Can not parse params to JSON');
-        }
-        const _url: string = this.baseUrl + url + _params;
+    public get(url: string, withToken: boolean = true): Promise<any> {
+        const _url: string = this.baseUrl + url;
         let _headers: HttpHeaders = new HttpHeaders();
         _headers.set('Content-Type', 'application/json');
         if (withToken) {
@@ -40,12 +32,13 @@ export class HttpService {
             _headers,
             observe: 'response',
         }
-        return this.http
+        const resp$ = this.http
             .get(_url, _httpOptions)
             .pipe(
                 retry(1), // retry a failed request up to 1 times
                 catchError(this._handleError)
             );
+        return lastValueFrom(resp$);
     }
     
     /**
@@ -54,7 +47,7 @@ export class HttpService {
      * @param url
      * @param withToken
      */
-    public async post(body: any, url: string, withToken: boolean = true): Promise<any> {
+    public post(body: any, url: string, withToken: boolean = true): Promise<any> {
         const _url: string = this.baseUrl + url;
         let _headers: HttpHeaders = new HttpHeaders();
         _headers.set('Content-Type', 'application/json');

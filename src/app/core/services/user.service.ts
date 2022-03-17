@@ -1,11 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "./http.service";
 import {UserInterface} from "../interfaces/user.interface";
-import {Subscription} from "rxjs";
 import {RegisterDataInterface} from "../interfaces/auth.interface";
 import {HttpResponse} from "@angular/common/http";
 import {ResponseInterface} from "../interfaces/response.interface";
-import {APIS} from "../app.api";
+import {UserAPIS} from "../app.api";
 import {Router} from "@angular/router";
 
 
@@ -23,12 +22,13 @@ export class UserService {
     /**
      * TODO: To get user data
      */
-    getUserData(): Subscription {
+    getUserData(): Promise<UserInterface> {
         return this.http
-            .get({}, 'getUser')
-            .subscribe((user: UserInterface) => {
+            .get(UserAPIS.GET_USERS)
+            .then((user: UserInterface) => {
                 return user;
             })
+        ;
     }
     
     /**
@@ -37,7 +37,7 @@ export class UserService {
      */
     public manageRegister(registerData: RegisterDataInterface): Promise<any> {
         return this.http
-            .post(registerData, APIS.USER_REGISTER, false)
+            .post(registerData, UserAPIS.USER_REGISTER, false)
             .then((response: HttpResponse<any>) => {
                 const body: ResponseInterface = Object.assign({}, <any>response.body);
                 if (body.done) {
