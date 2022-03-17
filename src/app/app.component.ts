@@ -25,22 +25,4 @@ export class AppComponent {
         });
         this.authService.checkIsLoggedIn();
     }
-    
-    /**
-     * Toggles theme.
-     * @param checked
-     */
-    toggleDarkTheme(checked: boolean) {
-        this.themeService.setDarkTheme(checked);
-    }
-    
-    /**
-     * Logs out the user.
-     */
-    logout() {
-        this.authService.logout()
-            .catch((error: any) => {
-                console.log('Error occurred when trying to Logout:' + error.message);
-            });
-    }
 }

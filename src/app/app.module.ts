@@ -3,14 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ThemeService} from "./core/services/theme.service";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {HttpClientModule} from "@angular/common/http";
-import {HttpService} from "./core/services/http.service";
-import {AuthService} from "./core/services/auth.service";
+import {HeaderModule} from "./core/modules/header/header.module";
 
 @NgModule({
     declarations: [
@@ -24,12 +22,10 @@ import {AuthService} from "./core/services/auth.service";
         MatButtonModule,
         MatMenuModule,
         MatSlideToggleModule,
-        HttpClientModule
+        HttpClientModule,
+        HeaderModule,
     ],
     providers: [
-        ThemeService,
-        HttpService,
-        AuthService,
     ],
     bootstrap: [AppComponent],
 })

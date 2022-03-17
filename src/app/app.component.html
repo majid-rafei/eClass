@@ -1,21 +1,8 @@
 <div [ngClass]="isDarkTheme ? 'dark-theme' : 'light-theme'">
-    <mat-toolbar color="primary">
-        <mat-toolbar-row>
-            <button mat-button [routerLink]="'/'">Home</button>
-            <button mat-button [routerLink]="'/eclass'">E-Class</button>
-            <span class="spacer"></span>
-            <span class="header-item theme-btn">
-                <mat-slide-toggle
-                        [checked]="isDarkTheme"
-                        (change)="toggleDarkTheme($event.checked)"
-                >
-                    Dark theme
-                </mat-slide-toggle>
-            </span>
-            <a mat-flat-button *ngIf="!isLoggedIn" [routerLink]="'/auth/login'" style="margin-left: 10px">Login</a>
-            <a mat-flat-button *ngIf="!isLoggedIn" [routerLink]="'/auth/register'" style="margin-left: 10px">Register</a>
-            <a mat-flat-button *ngIf="isLoggedIn" (click)="logout()" style="margin-left: 10px">Logout</a>
-        </mat-toolbar-row>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="app-header">
+        <app-header></app-header>
+    </div>
+    <div class="app-main">
+        <router-outlet></router-outlet>
+    </div>
 </div>

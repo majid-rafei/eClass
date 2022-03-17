@@ -2,16 +2,20 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {Router} from '@angular/router';
 import {LoginSentInterface} from "../interfaces/auth.interface";
 import {ResponseInterface} from "../interfaces/response.interface";
-import {HttpResponse, HttpResponseBase} from '@angular/common/http';
+import {HttpResponse} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 import {HttpService} from "./http.service";
 import * as moment from "moment";
-import {Subject, Subscription} from "rxjs";
+import {Subject} from "rxjs";
+import {APIS} from "../app.api";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export class AuthService implements OnDestroy {
     
     baseUrl = environment.API_BASE;
+    static passwordLength: number = 6;
     
     /**
      * _isLoggedIn and _isLoggedIn$ are private properties and their value changes only from within this class.
@@ -22,7 +26,7 @@ export class AuthService implements OnDestroy {
     
     constructor(
         private http: HttpService,
-        private router: Router
+        private router: Router,
     ) {
     }
     
@@ -33,19 +37,17 @@ export class AuthService implements OnDestroy {
      * Requests a login with user credentials and sets the next value of _isLoggedIn$ Observable.
      * @param loginData
      */
-    manageLogin(loginData: LoginSentInterface): Subscription {
+    manageLogin(loginData: LoginSentInterface) {
         return this.http
-            .post(loginData, 'auth', false)
-            .subscribe((response: HttpResponse<HttpResponseBase>) => {
-                console.log('response', response)
+            .post(loginData, APIS.AUTHENTICATE, false)
+            .then((response: HttpResponse<any>) => {
                 const body: ResponseInterface = Object.assign({}, <any>response.body);
                 const tkn = body.data.item;
                 this._setTokenToLocalStorage(tkn.accessToken, tkn.refreshToken, Number(tkn.expiresIn));
                 this._isLoggedIn.next(true);
-                this.router.navigate(['/']).then(r => {
-                })
+                this.router.navigate(['/']).then(r => {})
             })
-            ;
+        ;
     }
     
     // /**

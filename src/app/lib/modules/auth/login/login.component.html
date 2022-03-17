@@ -6,11 +6,11 @@
         <form fxLayout="column" (ngSubmit)="login(loginData)">
             <mat-card-content fxLayout="column">
                 <mat-form-field>
-                    <input type="email" [(ngModel)]="loginData.email" name="email" matInput placeholder="Email">
+                    <input type="email" [(ngModel)]="loginData.email" name="email" matInput placeholder="Email" required>
                 </mat-form-field>
                 <mat-form-field>
                     <input type="password" [(ngModel)]="loginData.password" name="password" matInput
-                           placeholder="Password">
+                           placeholder="Password" required>
                 </mat-form-field>
             </mat-card-content>
             <button type="submit" mat-stroked-button color="accent" fxLayoutAlign="center center">Login</button>

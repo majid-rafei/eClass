@@ -1,3 +1,7 @@
-.spacer {
-    flex: 1 1 auto;
+.app-header {
+    height: 65px;
+}
+
+.app-main {
+    height: calc(100% - 65px);
 }

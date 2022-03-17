@@ -1,10 +1,12 @@
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {Observable, retry, throwError} from "rxjs";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {lastValueFrom, Observable, retry, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export class HttpService {
     baseUrl = environment.API_BASE;
     
@@ -52,7 +54,7 @@ export class HttpService {
      * @param url
      * @param withToken
      */
-    post(body: any, url: string, withToken: boolean = true): Observable<any> {
+    public async post(body: any, url: string, withToken: boolean = true): Promise<any> {
         const _url: string = this.baseUrl + url;
         let _headers: HttpHeaders = new HttpHeaders();
         _headers.set('Content-Type', 'application/json');
@@ -64,12 +66,13 @@ export class HttpService {
             _headers,
             observe: 'response',
         }
-        return this.http
+        const resp$ = this.http
             .post(_url, body, _httpOptions)
             .pipe(
                 retry(1), // retry a failed request up to 1 times
                 catchError(this._handleError)
             );
+        return lastValueFrom(resp$);
     }
     
     /**
@@ -78,17 +81,17 @@ export class HttpService {
      * @private
      */
     private _handleError(error: HttpErrorResponse) {
+        let msg: string = '';
         if (error.status === 0) {
             // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error);
+            msg = 'An error occurred:' + error.error;
         } else {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong.
-            console.error(
-                `Backend returned code ${error.status}, body was: `, error.error);
+            msg = `Backend returned code ${error.status}`;
         }
         // Return an observable with a user-facing error message.
-        return throwError(() => new Error('Something bad happened; please try again later.'));
+        return throwError(() => new Error(msg));
     }
     
     /**

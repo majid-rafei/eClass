@@ -1,0 +1,24 @@
+<div class="card-wrapper">
+    <mat-card fxLayout="column">
+        <mat-card-header>
+            <mat-card-title>Registration</mat-card-title>
+        </mat-card-header>
+        <form fxLayout="column" (ngSubmit)="register()">
+            <mat-card-content fxLayout="column">
+                <mat-form-field>
+                    <input type="email" [(ngModel)]="registerData.email" name="email" matInput placeholder="Email"
+                           required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" [(ngModel)]="registerData.password" name="password" matInput
+                           placeholder="Password" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" matInput
+                           placeholder="Confirm Password" required>
+                </mat-form-field>
+            </mat-card-content>
+            <button type="submit" mat-stroked-button color="accent" class="btn-block">Register</button>
+        </form>
+    </mat-card>
+</div>

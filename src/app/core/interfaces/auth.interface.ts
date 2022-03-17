@@ -6,3 +6,8 @@ export interface LoginSentInterface {
 export interface LoginReceivedInterface {
 
 }
+
+export interface RegisterDataInterface {
+    email: string,
+    password: string,
+}
